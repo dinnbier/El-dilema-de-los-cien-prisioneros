@@ -1,0 +1,364 @@
+ %--------------------------
+% Archivo: circunferencia.tex
+% Autor:   Adri‡n Mart’n Dinnbier
+% Fecha:   17-10-2012
+%--------------------------
+
+% Tipo de documento
+\documentclass[12pt,a4paper,fleqn]{article}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+
+% Medidas
+\setlength{\oddsidemargin}{-0.54cm}
+\setlength{\topmargin}{0cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0.75cm}
+\setlength{\textheight}{24cm}
+\setlength{\textwidth}{17cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.3ex}
+
+
+% Paquetes
+\usepackage[latin1]{inputenc}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{ifpdf}
+\usepackage[breaklinks]{hyperref}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usepackage{qtree}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{automata,positioning}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{pstricks}
+
+%Para GEOGEBRA GRÁFICOS
+\usepackage{mathrsfs}
+\usepackage{amssymb,fancyhdr,txfonts,pxfonts}
+
+%para el símbolo del euro
+\usepackage{ marvosym }
+\usepackage{polynom}
+
+
+%MARGEN EN LAS TABLAS
+%VISTO EN: https://tex.stackexchange.com/questions/31672/column-and-row-padding-in-tables
+\usepackage{array}% http://ctan.org/pkg/array
+
+
+%ENCABEZADOS
+\usepackage{fancyhdr}
+
+
+
+% aqui definimos el encabezado de las paginas pares e impares.
+\lhead[x1]{}
+\chead[y1]{}
+\rhead[z1]{}
+\renewcommand{\headrulewidth}{0pt}
+
+% aqui definimos el pie de pagina de las paginas pares e impares.
+\lfoot[a1]{\footnotesize El dilema de los cien prisioneros}
+\cfoot[c1]{}
+\rfoot[e1]{\thepage}
+\renewcommand{\footrulewidth}{0.5pt}
+
+
+\pagestyle{fancy} 
+
+
+% Datos para el PDF
+\ifpdf
+\pdfinfo
+  {
+  /Title  (El dilema de los cien prisioneros)
+  /Author (A.Mart\'in Dinnbier)
+  }
+\fi
+
+
+
+\begin{document}
+\title{El dilema de los cien prisioneros}
+\author{Clara Grima}
+\date{16 de abril de 2017}
+\maketitle
+
+\small Comentario de texto matemático. Matemáticas aplicadas a las ciencias sociales. 1º BACHILLERATO.  \\
+  \url{https://www.abc.es/ciencia/abci-dilema-cien-prisioneros-201705161136_noticia.html}
+
+\section{Artículo de divulgación}
+
+\textbf{Planteamos uno de los problemas fundamentales de la teoría de juegos, pero llevado al máximo. Un centenar de reos tienen que decidir si confesar o no para obtener la mínima pena, pero lo que decidan afecta a los demás. ¿Qué harían ustedes en su lugar?}
+
+
+Si han oído hablar alguna vez de la teoría de juegos o de John Nash (aquel de la mente maravillosa) posiblemente les suene aquello del dilema del prisionero. Sin duda se trata de uno de los problemas fundamentales en dicha teoría, la de juegos. El planteamiento es el siguiente: tenemos a dos sospechosos de un fraude pero nos faltan pruebas concluyentes para condenarlos. Los aislamos y les ofrecemos, por separado, que si confiesan y su compañero no, el que confiese se irá de rositas y su colega se quedará 10 años a la sombra. Si confiesan los dos, la justicia les concederá unas vacaciones pagadas entre rejas 6 años cada uno. Eso sí, en el caso de que ninguno confiese, ambos pasarán un año entre rejas por cargos menores. ¿Qué harían ustedes en su lugar? Uno puede pensar que lo mejor es confesar, salir en libertad y que el otro se coma los 10 años pero si hacemos esto y el otro también confiesa, nos quedamos ambos 6 años cada a uno a la sombra. Por lo tanto, lo inteligente es no confesar porque la condena más pequeña se da en ese caso, cuando ninguno de los dos confiesa: un año para cada uno, dos años en total. Pero recordemos que los sospechosos están aislados y no saben qué va a decidir el otro, por lo que si decide no confesar y el otro confiesa está perdido. O al menos, preso durante 10 años. Entienden ya de dónde viene lo de dilema, ¿verdad?
+
+Como decíamos al principio, este es un problema muy clásico de teoría de juegos y que mucha gente conoce. Hoy les quiero contar un problema menos conocido de prisioneros y dilemas que Alberto Márquez contó hace unos días en nuestro podcast Los 3 Chanchitos: el problema de los 100 prisioneros. Sí, 100, a los matemáticos nos gusta poner a prueba la inteligencia de los reos en situaciones límites.
+
+El problema de los 100 prisioneros fue planteado por Anna Gál y Peter Bro Miltersen, dos investigadores daneses en 2003 y se puede enunciar como sigue:
+
+Tenemos a 100 prisioneros y cada uno de ellos tiene un número distinto (del 1 al 100) en su gorro, que ellos pueden ver perfectamente, basta con que se quiten el gorro. En un habitación de la prisión tenemos 100 casilleros, también numerados del 1 al 100, y dentro de cada cajón hemos puesto una tarjeta con un número del 1 al 100 que, lógicamente, no tiene por qué coincidir con el del cajón en cuestión. El alcaide de la prisión es un poco sádico y les propone jugar para decidir si se salven todos o mueren todos. Para ello, cada prisionero, por separado, entrará en la habitación del casillero, y puede abrir como máximo 50 cajones para encontrar aquella en la que está la tarjeta con el número de su gorro. Antes de salir, vuelve a cerrar todas los cajones. Si, siguiendo estas reglas, todos encuentran su número, se salvan todos. En otro caso, si un prisionero no encuentra su número en las 50 cajones que abre, morirán todos.
+
+¿Con qué probabilidad se salvan todos si abren los 50 cajones a lo loco, sin pensar? Vamos a calcularla, que no es complicado. Para ello pensemos en el primer prisionero: si abre aleatoriamente 50 de los 100 cajones, la mitad, la probabilidad de que encuentre su número es de eso, la mitad, $\frac{1}{2}$
+
+Si fueran solo dos prisioneros, la probabilidad de que lo encontraran los dos y quedasen libres es el producto de la probabilidades de los dos:
+
+
+
+\begin{center}
+$ \displaystyle{ \frac{1}{2} \cdot \frac{1}{2}=  \left(\frac{1}{2} \right)^2}$
+\end{center}
+
+Como son 100 prisioneros, la probabilidad de que todos encontraran su número en estas condiciones sería:
+
+
+\begin{center}
+$\displaystyle{ \left( \frac{1}{2} \right)  ^{100}=  0.00000000000000000000000000000008}$
+\end{center}
+
+
+Vamos, que se mueren todos con probabilidad casi del 100\%. La crueldad del alcaide es así, qué le vamos a hacer. Bueno, sí que podemos hacer algo. En situaciones desesperadas hay que tomar decisiones desesperadas y en este caso se trata solamente de pensar un poco.
+
+Los prisioneros puede decidir una estrategia ordenada común para todos, al fin y al cabo todos quieren que los demás acierten su número. Y la estrategia es tan simple como la siguiente. El prisionero k (el que lleva una k en su gorro y lo sabe) abre primero el cajón k si está su número, ha ganado; en otro caso, abre el cajón cuyo número ha encontrado en la cajón k. Si está el suyo ha ganado, en otro caso, abre el cajón que indica este segundo número encontrado y así hasta que encuentre el suyo o hasta que haya abierto 50 cajones.
+
+Veamos un ejemplo con 8 prisioneros:
+
+
+{\renewcommand{\arraystretch}{2}%
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3cm}|c|c|c|c|c|c|c|c|}
+\hline
+\centering{cajón}   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+\centering{tarjeta} & 3 & 4 & 6 & 7 & 8 & 1 & 2 & 5 \\ \hline
+\end{tabular}
+\caption{Primera situación}
+\label{tabla:Tabla 1}
+\end{table}
+
+
+
+En este ejemplo se salvarían todos. El prisionero 1 abre el cajón 1, después la 3, después la 6 y ahí está su número. Con el resto de prisioneros ocurre lo mismo, encuentra su número antes de abrir 4 cajones.
+
+
+
+¿Qué pasaría en la siguiente situación?
+
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|p{3cm}|c|c|c|c|c|c|c|c|}
+		\hline
+		\centering{cajón}   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\ \hline
+		\centering{tarjeta} & 2 & 3 & 5 & 6 & 7 & 8 & 1 & 4 \\ \hline
+	\end{tabular}
+\caption{Segunda situación}
+\label{tabla:Tabla 2}
+\end{table}
+
+Este es un caso de los chungos porque solo los prisioneros 4, 6 y 8 encontrarían su número con la estrategia y, por lo tanto, morirían todos.
+
+¿Qué diferencia hay entre los dos ejemplos? Vamos a representar ambas situaciones mediante un grafo, que es una herramienta que me encanta y que ayuda en la resolución de un montón de problemas. Un grafo no es más que un conjunto de puntos, vértices, en el que algunas parejas de estos vértices se unen entre sí mediante una línea, arista. Pueden pensar en Facebook como un grafo en el que los vértices son los usuarios y dos vértices estarán unido si son amigos en la citada red social. En realidad, necesitamos un grafo especial, un grafo dirigido porque las aristas serán flechas, con una dirección determinada. O sea, que nuestro grafo se parecerá más a Twitter o Instagram donde el hecho de que un usuario siga a otro no implica que este seguimiento sea mutuo. En nuestro grafo los vértices serán los 8 números y las aristas (flechas) indicarán el recorrido que hace un prisionero por los cajones.
+
+Así, el grafo del primer ejemplo sería el siguiente: (Grafo 1)
+
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.3\linewidth]{grafo1}
+
+%\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\begin{center}
+		\begin{tikzpicture}[scale=0.8]
+		\node[draw,circle] (6) at (2,0) {6};
+		\node[draw,circle] (5) at (4,0) {5};
+		\node[draw,circle] (4) at (5.41,1.41) {4};
+		\node[draw,circle] (3) at (5.41,3.41) {3};
+		\node[draw,circle] (2) at (4,4.83) {2};
+		\node[draw,circle] (1) at (2,4.83) {1};
+		\node[draw,circle] (8) at (0.59,3.41) {8};
+		\node[draw,circle] (7) at (0.59,1.41) {7};
+		
+		%
+		\draw[->,very thick] (1) to (3);
+		\draw[->,very thick] (2) to (4);
+		\draw[->,very thick] (3) to (6);
+		\draw[->,very thick] (6) to (1);
+		\draw[->,very thick] (4) to (7);
+		\draw[->,very thick] (7) to (2);
+		\draw[->,very thick] (8) to [bend left = 20](5);
+		\draw[->,very thick] (5) to [bend left = 20] (8);
+		
+		\end{tikzpicture}
+		\caption[Grafo 1]{Grafo 1}
+		\label{fig:grafo1}
+	\end{center}
+	
+\end{figure}
+
+¿Qué observan? Efectivamente, que en esta distribución se forman lo que llamamos en Teoría de Grafos ciclos, caminos circulares de vértices, que son de longitud 3 como máximo, Los hemos coloreado con distintos colores en la siguiente imagen: (Grafo 2)
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.3\linewidth]{grafo2}
+%	\caption[Grafo 1]{Grafo 2}
+%	\label{fig:grafo2}
+%\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\begin{center}
+		\definecolor{azul}{RGB}{93,155,236}
+		\definecolor{rojo}{RGB}{255,10,0}
+		\definecolor{verde}{RGB}{53,209,0}
+		\tikzstyle{rojo}=[draw,fill=rojo]
+		\tikzstyle{azul}=[draw,fill=azul]
+		\tikzstyle{verde}=[draw,fill=verde]
+		\begin{tikzpicture}[scale=0.8]
+		\node[draw,circle] (6) at (2,0) [rojo]{6};
+		\node[draw,circle] (5) at (4,0) [verde]{5};
+		\node[draw,circle] (4) at (5.41,1.41) [azul]{4};
+		\node[draw,circle] (3) at (5.41,3.41)[rojo] {3};
+		\node[draw,circle] (2) at (4,4.83) [azul]{2};
+		\node[draw,circle] (1) at (2,4.83) [rojo]{1};
+		\node[draw,circle] (8) at (0.59,3.41)[verde] {8};
+		\node[draw,circle] (7) at (0.59,1.41)[azul] {7};
+		
+		%
+		\draw[->,very thick] (1) to (3);
+		\draw[->,very thick] (2) to (4);
+		\draw[->,very thick] (3) to (6);
+		\draw[->,very thick] (6) to (1);
+		\draw[->,very thick] (4) to (7);
+		\draw[->,very thick] (7) to (2);
+		\draw[->,very thick] (8) to [bend left = 20](5);
+		\draw[->,very thick] (5) to [bend left = 20] (8);
+		
+		\end{tikzpicture}
+		\caption[Grafo 2]{Grafo 2}
+		\label{fig:grafo2}
+	\end{center}
+	
+\end{figure}
+
+
+Por lo tanto, ningún prisionero dará más de 3 pasos y no abrirá más de 3 cajones. Porque cualquier camino que empiece en el cajón cuyo número coincide con su gorro regresa a dicho número después de, como máximo, 3 pasos. En el caso del 5 y el 8 solo necesitan 2 pasos.
+
+Sin embargo en el segundo ejemplo, el grafo quedaría así: (Grafo 3)
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.3\linewidth]{grafo3}
+%	\caption[Grafo 1]{Grafo 3}
+%	\label{fig:grafo1}
+%\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\begin{center}
+		\definecolor{azul}{RGB}{93,155,236}
+		\definecolor{rojo}{RGB}{255,10,0}
+		\definecolor{verde}{RGB}{53,209,0}
+		\tikzstyle{rojo}=[draw,fill=rojo]
+		\tikzstyle{azul}=[draw,fill=azul]
+		\tikzstyle{verde}=[draw,fill=verde]
+		\begin{tikzpicture}[scale=0.8]
+		\node[draw,circle] (6) at (2,0) [azul]{6};
+		\node[draw,circle] (5) at (4,0) [rojo]{5};
+		\node[draw,circle] (4) at (5.41,1.41) [rojo]{4};
+		\node[draw,circle] (3) at (5.41,3.41)[rojo] {3};
+		\node[draw,circle] (2) at (4,4.83) [rojo]{2};
+		\node[draw,circle] (1) at (2,4.83) [rojo]{1};
+		\node[draw,circle] (8) at (0.59,3.41)[azul] {8};
+		\node[draw,circle] (7) at (0.59,1.41)[rojo] {7};
+		
+		%
+		\draw[->,very thick] (1) to (2);
+		\draw[->,very thick] (2) to (3);
+		\draw[->,very thick] (3) to (5);
+		\draw[->,very thick] (5) to (7);
+		\draw[->,very thick] (8) to (4);
+		\draw[->,very thick] (4) to (6);
+		\draw[->,very thick] (7) to (1);
+		\draw[->,very thick] (6) to (8);
+
+		
+		\end{tikzpicture}
+		\caption[Grafo 2]{Grafo 3}
+		\label{fig:grafo2}
+	\end{center}
+	
+\end{figure}
+
+En este caso, según el ciclo en rojo, por ejemplo el prisionero 7 encontraría la tarjeta del 1 en el cajón 7, abriría el cajón 1 y encontraría el 2; abriría el 2 y encontraría el 3; y abriría el 3, y no puede abrir más, y se encuentra el 5. Todos muertos. El problema está en que si el alcaide distribuye los números de esta segunda forma, en el grafo se forma un ciclo de longitud mayor que 4, que son los cajones que puede abrir, la mitad. En este ejemplo, ninguno de los implicados en el ciclo (1,2,3, 5,7) encontraría su número abriendo 4 cajones porque están implicados en un ciclo de longitud 5.
+
+Bueno, esto nos da una pista para calcular la probabilidad de que se salven todos en el caso de 100 prisioneros: la probabilidad de que se salven es la probabilidad de que al hacer la distribución de tarjetas el alcaide, en el grafo dirigido asociado no haya ningún ciclo de longitud mayor que 50. Y esa probabilidad, señoras y señores, es del 0,31183. Dicho de otra manera, la probabilidad de salvarse con la estrategia de abrir los cajones según la tarjeta que contengan es, nada más y nada menos, del 31,18\%. Alucinante, ¿no? Recuerden que sin estrategia la probabilidad de salvarse es prácticamente cero. Simplemente, maravilloso.
+
+Y no se puede mejorar, es la estrategia óptima como demostraron Eugene Curtin y Max Warshauer, de la Texas State University-San Marcos, en 2006.
+
+Lo que más me alucina de este problema, aparte de la brillante y óptima estrategia, es que una puede pensar que si el número de prisioneros es muy alto, la probabilidad de salvarse tenderá a 0, será cada vez más pequeña, ¿verdad? Pues no, si el número de prisioneros se hace todo lo grande que una quiera, se hace tender a infinito, la probabilidad de que se salven tiende a 30, 68\%. ¿No es maravilloso? Por muchos prisioneros que haya, esta estrategia garantiza la salvación de todos con una probabilidad superior al 30\%.
+
+Disfruten del día y no se metan en líos que ya ven cómo se las gastan algunos alcaides.
+
+
+
+\rule{15cm}{0.1mm}
+\section{Actividad}
+
+Después de leer el texto en profundidad escribe tu nombre en el encabezado de un folio y coméntalo. La estructura de tu comentario debe contener: 
+
+\begin{itemize}
+ \item Introducción. Explica brevemente las ideas claves que resumen el texto que has leído. Trata de explicar el texto como si se lo contases a alguien que no lo ha leído. ¿Cuál es la idea clave del texto? ¿De qué habla la autora? ¿En qué hace más hincapié?
+ \item Desarrollo. Tienes a continuación una serie de preguntas que pueden ayudarte a desarrollar el comentario. Empléalas como guía. 
+ 
+ \begin{enumerate}
+ 	
+ 	\item ¿Te ha parecido interesante el problema? 
+ 	\item ¿Te ha sorprendido algún aspecto de lo que explica?
+ 	
+ 	\item Cuando trabajamos la paradoja del cumpleaños (la probabilidad de que dos personas hubiesen nacido el mismo día en una clase de bachillerato) vimos que la intuición no siempre nos ayuda a estimar correctamente probabilidades. ¿Hubieras dicho que existía una estrategia que pudiese ayudar tantísimo a los presos?
+ 	\item ¿Has comprendido todo lo que has leído? Si hay alguna parte que no te ha resultado fácil detalla porqué. 
+ 	
+ \end{enumerate}
+ 
+ \item Conclusión. Cuéntame tu opinión personal sobre el texto: ¿Lo ves accesible? ¿Te parece interesante? ¿Crees que la forma en que está escrito facilita su comprensión? ¿Crees que las matemáticas son más interesantes cuando se aplican a situaciones de la vida real? ¿Te parece que las matemáticas se pueden aplicar a la vida real o que es solo un intento de los profesores por hacerlas parecer interesantes? 
+
+\end{itemize}
+
+
+
+
+
+% Datos impresos del documento
+%\begin{table}[b]
+
+%\rule{\textwidth}{0.1mm}
+%\begin{footnotesize}
+%\setlength{\parskip}{0.5ex}
+%Autores: Adrián Martín Dinnbier y Germán Martín González \par
+%Creado con \LaTeX. \texttt {por Adrián Martín Dinnbier y Germán Martín González} disponible en www.maleducados.com
+%	\begin{center}
+%	\CcGroupBySa{0.83}{0.95ex}\\
+%	{\tiny\CcNote{\CcLongnameBySa}}
+%\vspace*{-2.5ex}
+%\end{center}
+%\end{footnotesize}
+%\end{table}
+
+Esta actividad está planteada sobre un texto publicado en ABC en la sección "Abecedario de las matemáticas" por Clara Grima. 
+
+\end{document}
